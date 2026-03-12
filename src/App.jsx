@@ -1,9 +1,9 @@
 import { useState } from "react"
-import Sidebar      from "../components/Sidebar"
-import RecipeCard   from "../components/RecipeCard"
-import DetailModal  from "../components/DetailModal"
-import AddItemModal from "../components/AddItemModal"
-import Toast        from "../components/Toast"
+import Sidebar      from "./components/Sidebar"
+import RecipeCard   from "./components/RecipeCard"
+import DetailModal  from "./components/DetailModal"
+import AddItemModal from "./components/AddItemModal"
+import Toast        from "./components/Toast"
 
 const MOCK_DATA = [
   {
@@ -117,7 +117,7 @@ export default function App() {
     return matchCat && matchSearch
   })
 
-  // Sort  ← thêm
+  // Sort 
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "id_asc")   return a.id - b.id
     if (sortBy === "id_desc")  return b.id - a.id
@@ -194,7 +194,7 @@ export default function App() {
           </span>
         </div>
 
-        {/* Sort bar ← thêm */}
+        {/* Sort bar  */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-muted)", letterSpacing: "1px", textTransform: "uppercase" }}>
                Sort by
@@ -226,7 +226,7 @@ export default function App() {
 
         {/* Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(270px, 1fr))", gap: "22px" }}>
-          {sorted.map(item => (   // ← đổi filtered thành sorted
+          {sorted.map(item => (   // 
             <RecipeCard
               key={item.id}
               item={item}
