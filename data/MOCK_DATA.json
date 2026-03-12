@@ -1,8 +1,18 @@
 {
-    "id": 1, 
-    "category": "Food",
-    "name": "Classic Beef Pho",
-    "materials": "Rice noodles, beef brisket, star anise, cinnamon, ginger, onion, fish sauce",
-    "description": "A traditional Vietnamese noodle soup with rich broth, slow-cooked for 6 hours.",
-    "image": null
+    "1": {
+        "id": 1, 
+        "category": "Food",
+        "name": "Classic Beef Pho",
+        "materials": "Rice noodles, beef brisket, star anise, cinnamon, ginger, onion, fish sauce",
+        "description": "A traditional Vietnamese noodle soup with rich broth, slow-cooked for 6 hours.",
+        "image": null
+    },
+    "2": {
+        "id": 2, 
+        "category": "Drink",
+        "name": "Brown Sugar Bubble Tea",
+        "materials": "Black tea, fresh milk, brown sugar syrup, tapioca pearls, ice",
+        "description": "Creamy milk tea with chewy tapioca pearls and caramelized brown sugar.",
+        "image": null
   }
+}
