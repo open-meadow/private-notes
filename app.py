@@ -6,9 +6,9 @@ app = FastAPI()
 @app.get("/")
 def main():
     with open("data/MOCK_DATA.json", "r") as mock_data:
-        print(mock_data)
+        mock_data_json = json.load(mock_data)
     
-    return {"hello": "world"}
+    return mock_data_json
 
 
 if __name__ == "__main__":
