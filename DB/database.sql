@@ -43,3 +43,20 @@ INSERT INTO Recipe (title, category_id, ingredients, instructions) VALUES
 
 -- 3. 잘 들어갔는지 최종 확인!
 SELECT * FROM Recipe;
+
+-- ==========================================
+-- 3. Example Query to Add a New Recipe
+-- (Use this template for adding user-input data)
+-- ==========================================
+
+INSERT INTO Recipe (title, category_id, ingredients, instructions, image_url)
+VALUES (
+    'New Recipe Title', 
+    1, -- Category ID (1:Food, 2:Drink, 3:Dessert, 4:Item)
+    'List of ingredients separated by commas', 
+    'Step-by-step cooking instructions', 
+    'https://example.com/image.jpg' -- Optional image URL
+);
+
+-- Check if the new data is added correctly
+SELECT * FROM Recipe ORDER BY id DESC LIMIT 1;
