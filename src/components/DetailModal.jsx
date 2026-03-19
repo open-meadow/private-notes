@@ -8,7 +8,7 @@ export default function DetailModal({ item, onClose }) {
       <div style={styles.overlay} onClick={onClose} />
       <div style={styles.modal}>
 
-        {/* Hero — ảnh hoặc icon */}
+        {/* Image or Icon */}
         <div style={styles.hero}>
           {item.image
             ? <img src={item.image} alt={item.name} style={styles.heroImg} />
@@ -31,7 +31,7 @@ export default function DetailModal({ item, onClose }) {
             ...styles.textBox,
             ...(item.materials ? {} : styles.textBoxEmpty)
           }}>
-            {item.materials || "Chưa có materials."}
+            {item.materials || "Materials not available."}
           </div>
 
           <div style={styles.divider} />
@@ -42,7 +42,7 @@ export default function DetailModal({ item, onClose }) {
             ...styles.textBox,
             ...(item.description ? {} : styles.textBoxEmpty)
           }}>
-            {item.description || "Chưa có mô tả."}
+            {item.description || "Description not available."}
           </div>
         </div>
 

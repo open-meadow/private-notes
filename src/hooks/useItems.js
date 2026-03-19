@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getItems, addItem } from "../public/api/itemApi";
+import { getItems, addItem } from "../api/itemApi";
 
 export function useItems() {
   const [items, setItems]             = useState([]);

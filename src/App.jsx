@@ -1,9 +1,10 @@
 import { useState } from "react"
-import Sidebar      from "./components/Sidebar"
 import RecipeCard   from "./components/RecipeCard"
 import DetailModal  from "./components/DetailModal"
 import AddItemModal from "./components/AddItemModal"
 import Toast        from "./components/Toast"
+import Sidebar      from "./components/Sidebar"
+
 
 const MOCK_DATA = [
   {

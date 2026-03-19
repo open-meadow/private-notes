@@ -1,4 +1,3 @@
-import MusicPlayer from "./MusicPlayer";
 
 const CATEGORIES = [
   { key: "all",     icon: "🍽️", label: "All" },
@@ -61,8 +60,7 @@ export default function Sidebar({ activeCategory, onCategoryChange, onSearch, on
         </button>
       </div>
 
-      {/* Music Player */}
-      <MusicPlayer />
+  
 
     </aside>
   );

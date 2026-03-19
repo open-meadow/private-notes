@@ -7,7 +7,7 @@ export default function AddItemModal({ onClose, onSave, editItem = null }) {
   const [description, setDescription] = useState("");
   const [preview, setPreview]         = useState(null);
 
-  // Nếu là edit → điền sẵn dữ liệu cũ
+  // For edit → put the data that already there
   useEffect(() => {
     if (editItem) {
       setName(editItem.name || "");
