@@ -27,3 +27,4 @@ dist-ssr
 *.sw?
 .temp
 paperless-frontend
+/__pycache__/
