@@ -1,0 +1,18 @@
+:root {
+  --cream: #F5EFE4;
+  --cream-dark: #EDE4D3;
+  --brown-deep: #2C1A0E;
+  --brown-mid: #6B3F1F;
+  --brown-warm: #A0622A;
+  --terracotta: #C4622D;
+  --gold: #C8963E;
+  --text-main: #2C1A0E;
+  --text-muted: #7A6552;
+  --border: rgba(107,63,31,0.18);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
