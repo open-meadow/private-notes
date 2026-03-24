@@ -1,10 +1,18 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import sqlite3
 import json
 
-
 app = FastAPI()
 DATABASE_PATH = "DB/recipe.db"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:5173/*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def main():
@@ -25,7 +33,19 @@ def items():
         cursor = connection.cursor()
 
         cursor.execute("SELECT * FROM Recipe")
-        recipes = cursor.fetchall()
+        rows = cursor.fetchall()
+
+        recipes = [
+            {
+                "id": row[0],
+                "name": row[1],
+                "category": row[2],
+                "ingredients": row[3],
+                "description": row[4],
+                "extra": row[5]
+            }
+            for row in rows
+        ]
 
         return recipes
 
