@@ -16,7 +16,16 @@ export default function RecipeCard({ item, onClick, onDelete, onEdit }) {
       {/* the content on the main page*/}
       <div style={styles.body} onClick={() => onClick(item)}>
         <div style={styles.category}>{item.category}</div>
-        <div style={styles.title}>{item.name}</div>
+        <div style={{
+                ...styles.title,
+               display: "-webkit-box",
+               WebkitLineClamp: 1,
+               WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+                textOverflow: "ellipsis",
+            }}>
+            {item.name}
+        </div>
         {item.materials && (
           <div style={styles.materials}>
             📝 {item.materials.length > 60

@@ -7,6 +7,9 @@ export default function AddItemModal({ onClose, onSave, editItem = null }) {
   const [description, setDescription] = useState("");
   const [preview, setPreview]         = useState(null);
 
+  const CATEGORY_ID_MAP = {
+  Food: 1, Drink: 2, Dessert: 3, Item: 4
+}
   // For edit → put the data that already there
   useEffect(() => {
     if (editItem) {
@@ -27,10 +30,18 @@ export default function AddItemModal({ onClose, onSave, editItem = null }) {
   };
 
   const handleSave = () => {
-    if (!name)     { alert("⚠️ Please enter a name!"); return; }
-    if (!category) { alert("⚠️ Please choose a category!"); return; }
-    onSave({ name, materials, category, description, image: preview });
-  };
+  if (!name)     { alert("⚠️ Please enter a name!"); return; }
+  if (!category) { alert("⚠️ Please choose a category!"); return; }
+
+  onSave({
+    name,
+    category,                              // text "Food", "Drink"...
+    categoryId: CATEGORY_ID_MAP[category], // số 1, 2, 3, 4 → gửi lên API
+    materials,
+    description,
+    image: preview,
+  });
+};
 
   return (
     <>
