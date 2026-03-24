@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import RecipeCard   from "./components/RecipeCard"
 import DetailModal  from "./components/DetailModal"
 import AddItemModal from "./components/AddItemModal"
 import Toast        from "./components/Toast"
 import Sidebar      from "./components/Sidebar"
+import itemApi from "./api/itemApi" 
 
 
 const MOCK_DATA = [
@@ -101,15 +102,27 @@ const MOCK_DATA = [
 ]
 
 export default function App() {
-  const [items, setItems]               = useState(MOCK_DATA)
+  const [items, setItems]               = useState([])
   const [activeCategory, setCategory]   = useState("all")
   const [search, setSearch]             = useState("")
   const [selectedItem, setSelectedItem] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
   const [editItem, setEditItem]         = useState(null)
   const [toast, setToast]               = useState(null)
-  const [sortBy, setSortBy]             = useState("id_asc")  // ← thêm
+  const [sortBy, setSortBy]             = useState("id_asc")  
 
+  //connect to http://127.0.0.1:8000/items
+ useEffect(() => {
+  const loadItems = async () => {
+    try {
+      const data = await itemApi.getAll();  
+      setItems(data);
+    } catch (err) {
+      console.error("Failed to load items:", err);
+    }
+  };
+  loadItems();
+}, []);
   // Filter + Search
   const filtered = items.filter(item => {
     const matchCat    = activeCategory === "all" || item.category === activeCategory

@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import sqlite3
 import json
 
+
 app = FastAPI()
 DATABASE_PATH = "DB/recipe.db"
 
