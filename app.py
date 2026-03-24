@@ -1,9 +1,7 @@
-git from fastapi import FastAPI
+from fastapi import FastAPI
 import json
 
 app = FastAPI()
-
-print("hello from sofia")
 
 @app.get("/")
 def main():
