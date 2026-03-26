@@ -30,18 +30,18 @@ export default function DetailModal({ item, onClose }) {
           <div style={{
             ...styles.textBox,
             ...(item.materials ? {} : styles.textBoxEmpty)
-            }}>
+          }}>
             {item.materials
-            ? item.materials.split(",").map((m, i) => (
-           <div key={i} style={{
-              display: "flex", alignItems: "flex-start",
-              gap: "8px", marginBottom: "6px",
-              }}>
-              <span style={{ color: "var(--terracotta)", marginTop: "1px" }}>•</span>
-              <span>{m.trim()}</span>
-            </div>
-            )) : "No materials yet."
-             }
+              ? item.materials.split(",").map((m, i) => (
+                <div key={i} style={{
+                  display: "flex", alignItems: "flex-start",
+                  gap: "8px", marginBottom: "6px",
+                }}>
+                  <span style={{ color: "var(--terracotta)", marginTop: "1px" }}>•</span>
+                  <span>{m.trim()}</span>
+                </div>
+              )) : "No materials yet."
+            }
           </div>
 
           <div style={styles.divider} />

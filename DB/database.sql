@@ -1,10 +1,9 @@
--- 1. 카테고리 테이블
+
 CREATE TABLE Category (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL
 );
 
--- 2. 레시피 테이블
 CREATE TABLE Recipe (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
@@ -17,14 +16,13 @@ CREATE TABLE Recipe (
 
 SELECT * FROM Recipe;
 
--- 1. 카테고리 데이터 초기화 (이미 있다면 무시하고 추가)
+
 INSERT OR IGNORE INTO Category (id, name) VALUES (1, 'Food');
 INSERT OR IGNORE INTO Category (id, name) VALUES (2, 'Drink');
 INSERT OR IGNORE INTO Category (id, name) VALUES (3, 'Dessert');
 INSERT OR IGNORE INTO Category (id, name) VALUES (4, 'Item');
 
--- 2. 레시피 데이터 (MOCK_DATA 기반)
--- 이미 넣었던 데이터와 겹치지 않게 id는 자동으로 생성되도록 했습니다.
+
 
 INSERT INTO Recipe (title, category_id, ingredients, instructions) VALUES 
 ('Classic Beef Pho', 1, 'Rice noodles, beef brisket, star anise, cinnamon, ginger, onion, fish sauce', 'A traditional Vietnamese noodle soup with rich broth, slow-cooked for 6 hours.'),
@@ -41,13 +39,12 @@ INSERT INTO Recipe (title, category_id, ingredients, instructions) VALUES
 ('Banana Pancakes', 3, 'Ripe banana, eggs, oat flour, baking powder, cinnamon, maple syrup, butter', 'Mash banana with eggs. Mix in flour and baking powder. Cook on medium heat 2 min per side.'),
 ('Caesar Salad', 1, 'Romaine lettuce, parmesan, croutons, caesar dressing, black pepper, lemon', 'Toss lettuce with dressing. Top with croutons and shaved parmesan. Serve chilled.');
 
--- 3. 잘 들어갔는지 최종 확인!
+
 SELECT * FROM Recipe;
 
--- ==========================================
+
 -- 3. Example Query to Add a New Recipe
--- (Use this template for adding user-input data)
--- ==========================================
+
 
 INSERT INTO Recipe (title, category_id, ingredients, instructions, image_url)
 VALUES (

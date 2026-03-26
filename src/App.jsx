@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
-import RecipeCard   from "./components/RecipeCard"
-import DetailModal  from "./components/DetailModal"
+import RecipeCard from "./components/RecipeCard"
+import DetailModal from "./components/DetailModal"
 import AddItemModal from "./components/AddItemModal"
-import Toast        from "./components/Toast"
-import Sidebar      from "./components/Sidebar"
-import itemApi from "./api/itemApi" 
+import Toast from "./components/Toast"
+import Sidebar from "./components/Sidebar"
+import itemApi from "./api/itemApi"
 
 const CATEGORY_MAP = {
   1: "Food",
@@ -15,59 +15,59 @@ const CATEGORY_MAP = {
 
 
 export default function App() {
-  const [items, setItems]               = useState([])
-  const [activeCategory, setCategory]   = useState("all")
-  const [search, setSearch]             = useState("")
+  const [items, setItems] = useState([])
+  const [activeCategory, setCategory] = useState("all")
+  const [search, setSearch] = useState("")
   const [selectedItem, setSelectedItem] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
-  const [editItem, setEditItem]         = useState(null)
-  const [toast, setToast]               = useState(null)
-  const [sortBy, setSortBy]             = useState("id_asc")  
+  const [editItem, setEditItem] = useState(null)
+  const [toast, setToast] = useState(null)
+  const [sortBy, setSortBy] = useState("id_asc")
 
   //connect to http://127.0.0.1:8000/items
- useEffect(() => {
-  const loadItems = async () => {
-    try {
-      const data = await itemApi.getAll();
-      const normalized = data.map(item => ({
-        ...item,
-        name:        item.name,          
-        category:    CATEGORY_MAP[item.category],  
-        materials:   item.ingredients,   
-        description: item.description,   
-        image:       item.extra,         
-      }))
-      setItems(normalized);
-    } catch (err) {
-      console.error("Failed to load items:", err);
-    }
-  };
-  loadItems();
-}, []);
+  useEffect(() => {
+    const loadItems = async () => {
+      try {
+        const data = await itemApi.getAll();
+        const normalized = data.map(item => ({
+          ...item,
+          name: item.name,
+          category: CATEGORY_MAP[item.category],
+          materials: item.ingredients,
+          description: item.description,
+          image: item.extra,
+        }))
+        setItems(normalized);
+      } catch (err) {
+        console.error("Failed to load items:", err);
+      }
+    };
+    loadItems();
+  }, []);
   // Filter + Search
   const filtered = items.filter(item => {
-  const matchCat    = activeCategory === "all" || item.category === activeCategory
-  const matchSearch = item.name?.toLowerCase().includes(search.toLowerCase())
-                   || item.materials?.toLowerCase().includes(search.toLowerCase())
-  return matchCat && matchSearch
-})
+    const matchCat = activeCategory === "all" || item.category === activeCategory
+    const matchSearch = item.name?.toLowerCase().includes(search.toLowerCase())
+      || item.materials?.toLowerCase().includes(search.toLowerCase())
+    return matchCat && matchSearch
+  })
 
   // Sort 
   const sorted = [...filtered].sort((a, b) => {
-  if (sortBy === "id_asc")   return a.id - b.id
-  if (sortBy === "id_desc")  return b.id - a.id
-  if (sortBy === "name_az")  return (a.name || "").localeCompare(b.name || "")
-  if (sortBy === "name_za")  return (b.name || "").localeCompare(a.name || "")
-  return 0
-})
+    if (sortBy === "id_asc") return a.id - b.id
+    if (sortBy === "id_desc") return b.id - a.id
+    if (sortBy === "name_az") return (a.name || "").localeCompare(b.name || "")
+    if (sortBy === "name_za") return (b.name || "").localeCompare(a.name || "")
+    return 0
+  })
 
   // Counts
   const counts = {
-    all:     items.length,
-    Food:    items.filter(i => i.category === "Food").length,
-    Drink:   items.filter(i => i.category === "Drink").length,
+    all: items.length,
+    Food: items.filter(i => i.category === "Food").length,
+    Drink: items.filter(i => i.category === "Drink").length,
     Dessert: items.filter(i => i.category === "Dessert").length,
-    Item:    items.filter(i => i.category === "Item").length,
+    Item: items.filter(i => i.category === "Item").length,
   }
 
   const showToast = (msg, type = "success") => {
@@ -76,27 +76,27 @@ export default function App() {
   }
 
   const handleAdd = async (newItem) => {
-  try {
-    const result = await itemApi.addItem(newItem)
+    try {
+      const result = await itemApi.addItem(newItem)
 
-    // Normalize item from API
-    const normalized = {
-      ...result,
-      name:        result.name,
-      category:    CATEGORY_MAP[result.category],
-      materials:   result.ingredients,
-      description: result.description,
-      image:       result.extra,
+      // Normalize item from API
+      const normalized = {
+        ...result,
+        name: result.name,
+        category: CATEGORY_MAP[result.category],
+        materials: result.ingredients,
+        description: result.description,
+        image: result.extra,
+      }
+
+      setItems(prev => [...prev, normalized])
+      setShowAddModal(false)
+      showToast(" Note added!")
+    } catch (err) {
+      console.error(err)
+      showToast(" Failed to add note!", "error")
     }
-
-    setItems(prev => [...prev, normalized])
-    setShowAddModal(false)
-    showToast(" Note added!")
-  } catch (err) {
-    console.error(err)
-    showToast(" Failed to add note!", "error")
   }
-}
 
   const handleEdit = (updatedItem) => {
     setItems(prev => prev.map(i =>
@@ -129,15 +129,15 @@ export default function App() {
           <h2 style={{ fontFamily: "Playfair Display, serif", fontSize: "36px", color: "var(--brown-deep)" }}>
             Your{" "}
             <em style={{
-                fontStyle: "italic",
-               background: "linear-gradient(270deg, #C4622D, #C8963E, #A0622A, #e8b86d, #C4622D)",
-               backgroundSize: "300% 300%",
-               WebkitBackgroundClip: "text",
-               WebkitTextFillColor: "transparent",
-               backgroundClip: "text",
-               animation: "gradientFlow 4s ease infinite",
-                       }}>
-                    Lovely Notes
+              fontStyle: "italic",
+              background: "linear-gradient(270deg, #C4622D, #C8963E, #A0622A, #e8b86d, #C4622D)",
+              backgroundSize: "300% 300%",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "gradientFlow 4s ease infinite",
+            }}>
+              Lovely Notes
             </em>
           </h2>
           <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>
@@ -148,10 +148,10 @@ export default function App() {
         {/* Sort bar  */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
           <span style={{ fontSize: "12px", color: "var(--text-muted)", letterSpacing: "1px", textTransform: "uppercase" }}>
-               Sort by
-           </span>
+            Sort by
+          </span>
           <select
-              value={sortBy}
+            value={sortBy}
             onChange={e => setSortBy(e.target.value)}
             style={sortSelectStyle}
           >

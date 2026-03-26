@@ -1,10 +1,10 @@
 
 const CATEGORIES = [
-  { key: "all",     icon: "🍽️", label: "All" },
-  { key: "Food",    icon: "🍜", label: "Food" },
-  { key: "Drink",   icon: "🥤", label: "Drink" },
+  { key: "all", icon: "🍽️", label: "All" },
+  { key: "Food", icon: "🍜", label: "Food" },
+  { key: "Drink", icon: "🥤", label: "Drink" },
   { key: "Dessert", icon: "🍰", label: "Dessert" },
-  { key: "Item",    icon: "🛍️", label: "Item" },
+  { key: "Item", icon: "🛍️", label: "Item" },
 ];
 
 export default function Sidebar({ activeCategory, onCategoryChange, onSearch, onAddNew, counts = {} }) {
@@ -60,7 +60,7 @@ export default function Sidebar({ activeCategory, onCategoryChange, onSearch, on
         </button>
       </div>
 
-  
+
 
     </aside>
   );

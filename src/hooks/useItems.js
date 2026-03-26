@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { getItems, addItem } from "../api/itemApi";
 
 export function useItems() {
-  const [items, setItems]             = useState([]);
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState(null);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeCategory, setCategory] = useState("all");
-  const [search, setSearch]           = useState("");
+  const [search, setSearch] = useState("");
 
   // Get data from API when loading
   useEffect(() => {
@@ -25,7 +25,7 @@ export function useItems() {
 
   // Filter
   const filtered = items.filter(item => {
-    const matchCat    = activeCategory === "all" || item.category === activeCategory;
+    const matchCat = activeCategory === "all" || item.category === activeCategory;
     const matchSearch = item.name.toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });

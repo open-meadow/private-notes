@@ -17,14 +17,14 @@ export default function RecipeCard({ item, onClick, onDelete, onEdit }) {
       <div style={styles.body} onClick={() => onClick(item)}>
         <div style={styles.category}>{item.category}</div>
         <div style={{
-                ...styles.title,
-               display: "-webkit-box",
-               WebkitLineClamp: 1,
-               WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-                textOverflow: "ellipsis",
-            }}>
-            {item.name}
+          ...styles.title,
+          display: "-webkit-box",
+          WebkitLineClamp: 1,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}>
+          {item.name}
         </div>
         {item.materials && (
           <div style={styles.materials}>
