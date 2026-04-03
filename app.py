@@ -89,7 +89,19 @@ async def add_item(recipe: Recipe):
             "image": recipe.image
         }
     }
-    
+
+@app.delete("/items/item_id")
+def delete_item(item_id: int):
+    with sqlite3.connect(DATABASE_PATH) as connection:
+        cursor = connection.cursor()
+        
+        cursor.execute("DELETE FROM Recipe WHERE id = ?", (item_id))
+        connection.commit()
+        
+        if cursor.rowcount == 0:
+            return { "message": "Item not found" }
+        
+    return { "message": "Item deleted successfully" }
 
 if __name__ == "__main__":
     main()
