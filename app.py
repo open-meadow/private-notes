@@ -70,7 +70,7 @@ async def add_item(request: Request):
         
         cursor.execute("""
             INSERT INTO Recipe (title, category_id, ingredients, instructions)
-            VALUES (%s, %s, %s, %s, %s)
+            VALUES (?, ?, ?, ?)
         """, (
             recipe["name"],
             recipe["category"],
