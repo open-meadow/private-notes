@@ -18,7 +18,7 @@ app.add_middleware(
 
 class Recipe(BaseModel):
     name: str
-    category: str
+    category: int
     ingredients: Optional[str] = None
     description: Optional[str] = None
     image: Optional[str] = None
@@ -59,36 +59,36 @@ def items():
         return recipes
 
 @app.post("/add_item")
-async def add_item(request: Request):
-    data = await request.json()
-    
-    print("the data received is: ", data)
-    
-    recipe = {
-        "name": data["name"],
-        "category": data["category"],
-        "ingredients": data["ingredients"],
-        "description": data["description"],
-        "extra": data["extra"]
-    }
-    
-    print("the recipe is: ", recipe)
-
+async def add_item(recipe: Recipe):
     with sqlite3.connect(DATABASE_PATH) as connection:
         cursor = connection.cursor()
         
         cursor.execute("""
-            INSERT INTO Recipe (title, category_id, ingredients, instructions)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO Recipe (title, category_id, ingredients, instructions, image_url)
+            VALUES (?, ?, ?, ?, ?)
         """, (
-            recipe["name"],
-            recipe["category"],
-            recipe["ingredients"],
-            recipe["description"]
+            recipe.name,
+            recipe.category,
+            recipe.ingredients,
+            recipe.description,
+            recipe.image
         ))
 
+        connection.commit()
+        recipe_id = cursor.lastrowid
+
     
-    return { "message": "Data may or may not have been received" }
+    return { 
+        "message": "Data has been inserted successfully", 
+        "id": recipe_id, 
+        "recipe": {
+            "name": recipe.name,
+            "category": recipe.category,
+            "ingredients": recipe.ingredients,
+            "description": recipe.description,
+            "image": recipe.image
+        }
+    }
     
 
 if __name__ == "__main__":
