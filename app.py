@@ -90,7 +90,7 @@ async def add_item(recipe: Recipe):
         }
     }
 
-@app.delete("/items/item_id")
+@app.delete("/items/{item_id}")
 def delete_item(item_id: int):
     with sqlite3.connect(DATABASE_PATH) as connection:
         cursor = connection.cursor()
@@ -102,6 +102,35 @@ def delete_item(item_id: int):
             return { "message": "Item not found" }
         
     return { "message": "Item deleted successfully" }
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, recipe: Recipe):
+    with sqlite3.connect(DATABASE_PATH) as connection:
+        cursor = connection.cursor()
+        
+        cursor.execute("""
+            UPDATE Recipe
+            SET title = ?
+                category_id = ?
+                ingredients = ?
+                instructions = ?
+                image_url = ?    
+            WHERE id = ?
+        """, (
+            recipe.name,
+            recipe.category,
+            recipe.ingredients,
+            recipe.description,
+            recipe.image,
+            item_id
+        ))
+
+        connection.commit()
+        
+        if cursor.rowcount == 0:
+            return {"message": "Item not found"}
+        
+    return {"message": "Item updated successfully"}
 
 if __name__ == "__main__":
     main()
