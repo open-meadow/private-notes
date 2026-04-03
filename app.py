@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List, Optional
 import sqlite3
 import json
 
@@ -13,6 +15,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class Recipe(BaseModel):
+    name: str
+    category: str
+    ingredients: Optional[str] = None
+    description: Optional[str] = None
+    image: Optional[str] = None
 
 @app.get("/")
 def main():
