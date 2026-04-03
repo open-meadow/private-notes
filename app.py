@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import sqlite3
 import json
@@ -48,6 +48,15 @@ def items():
         ]
 
         return recipes
+
+@app.post("/add_item")
+async def add_item(request: Request):
+    data = await request.json()
+    
+    print("the data received is: ", data)
+    
+    return { "message": "Data may or may not have been received" }
+    
 
 if __name__ == "__main__":
     main()
