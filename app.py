@@ -65,6 +65,19 @@ async def add_item(request: Request):
     
     print("the recipe is: ", recipe)
 
+    with sqlite3.connect(DATABASE_PATH) as connection:
+        cursor = connection.cursor()
+        
+        cursor.execute("""
+            INSERT INTO Recipe (title, category_id, ingredients, instructions)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (
+            recipe["name"],
+            recipe["category"],
+            recipe["ingredients"],
+            recipe["description"]
+        ))
+
     
     return { "message": "Data may or may not have been received" }
     
