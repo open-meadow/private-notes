@@ -55,6 +55,17 @@ async def add_item(request: Request):
     
     print("the data received is: ", data)
     
+    recipe = {
+        "name": data["name"],
+        "category": data["category"],
+        "ingredients": data["ingredients"],
+        "description": data["description"],
+        "extra": data["extra"]
+    }
+    
+    print("the recipe is: ", recipe)
+
+    
     return { "message": "Data may or may not have been received" }
     
 
