@@ -6,7 +6,7 @@ import sqlite3
 import json
 
 app = FastAPI()
-DATABASE_PATH = "../DB/recipe.db"
+DATABASE_PATH = "DB/recipe.db"
 print("DB path:", DATABASE_PATH)
 app.add_middleware(
     CORSMiddleware,
