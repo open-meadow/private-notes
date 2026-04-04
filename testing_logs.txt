@@ -1,0 +1,23 @@
+Quality assurance testing
+
+Issues found:
+
+- If the title of the note is too long, it will alter the shape of the 
+box and the adjacent boxes from the main view.
+	
+	Solution: Add a word limit on the note’s title in the main view so 
+    that the title could still be as long as it needs to be, but will 
+    not change the shape of the box. The cut title must end in “...” so 
+    that the user knows that there is more text that can not be shown 
+    in the main view due to its size.
+
+**FIXED**
+
+
+- The list of ingredients gets compacted and doesn't show the 
+ingredients as a proper list.
+
+	Solution: Keep the structure the user used by keeping the “enter”s 
+    and showcasing every element within its own bullet point.
+
+**FIXED**

@@ -78,8 +78,7 @@ export default function App() {
   const handleAdd = async (newItem) => {
     try {
       const result = await itemApi.addItem(newItem)
-
-      // Normalize item from API
+ 
       const normalized = {
         ...result,
         name: result.name,
@@ -88,28 +87,56 @@ export default function App() {
         description: result.description,
         image: result.extra,
       }
-
+ 
       setItems(prev => [...prev, normalized])
       setShowAddModal(false)
-      showToast(" Note added!")
+      showToast("Note added!")
     } catch (err) {
       console.error(err)
-      showToast(" Failed to add note!", "error")
+      showToast("Failed to add note!", "error")
     }
   }
 
-  const handleEdit = (updatedItem) => {
+  const handleEdit = async (updatedItem) => {
+  try {
+    await itemApi.editItem(editItem.id, updatedItem)
+
     setItems(prev => prev.map(i =>
-      i.id === editItem.id ? { ...updatedItem, id: editItem.id } : i
+      i.id === editItem.id
+        ? {
+            ...i,
+            name: updatedItem.name,
+            category: updatedItem.category,
+            materials: updatedItem.materials,
+            description: updatedItem.description,
+            image: updatedItem.image,
+          }
+        : i
     ))
     setEditItem(null)
     showToast("✅ Note updated!")
+  } catch (err) {
+    console.error(err)
+    showToast("❌ Failed to update note!", "error")
   }
+}
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (!window.confirm("Delete this note?")) return
-    setItems(prev => prev.filter(i => i.id !== id))
-    showToast("🗑️ Note deleted!", "error")
+        try {
+      const response = await fetch(`http://localhost:8000/items/${id}`, {
+        method: "DELETE",
+      })
+ 
+      if (!response.ok) throw new Error("Delete failed")
+ 
+      setItems(prev => prev.filter(i => i.id !== id))
+      showToast("🗑️ Note deleted!", "error")
+    } catch (err) {
+      console.error(err)
+      showToast("❌ Failed to delete note!", "error")
+    }
+
   }
 
   return (
