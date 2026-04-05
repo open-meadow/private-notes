@@ -21,3 +21,16 @@ ingredients as a proper list.
     and showcasing every element within its own bullet point.
 
 **FIXED**
+
+- Notes don't appear in the main menu/view when created and only show
+up when the page is refreshed 
+(this doesn't happen when editing and deleting notes)
+
+- When an picture is added to a new note, it doesn't show up. The 
+picture only shows up after editing the note and addig the picture again
+
+- Might not be a real issue
+**THIS ONLY HAPPENED ONCE AND I DON'T KNOW WHY**
+When the local host page is closed and then opened again, the pictures
+in the notes don't load and onlu show up as "?". Everyting else loads 
+fine.
