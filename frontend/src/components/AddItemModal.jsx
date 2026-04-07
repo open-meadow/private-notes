@@ -106,7 +106,7 @@ export default function AddItemModal({ onClose, onSave, editItem = null }) {
           </div>
 
           {/* Image */}
-          <div style={styles.group}>
+          {/* <div style={styles.group}>
             <label style={styles.label}>
               Image <span style={{ textTransform: "none", letterSpacing: 0, fontSize: "11px" }}>(optional)</span>
             </label>
@@ -121,7 +121,7 @@ export default function AddItemModal({ onClose, onSave, editItem = null }) {
                 <input type="file" accept="image/*" style={{ display: "none" }} onChange={handleImageChange} />
               </label>
             )}
-          </div>
+          </div> */}
 
           {/* Actions */}
           <div style={styles.actions}>

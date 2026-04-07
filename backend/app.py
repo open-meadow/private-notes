@@ -71,7 +71,8 @@ async def add_item(recipe: Recipe):
             recipe.category,
             recipe.ingredients,
             recipe.description,
-            recipe.image
+            # recipe.image
+            None
         ))
 
         connection.commit()
